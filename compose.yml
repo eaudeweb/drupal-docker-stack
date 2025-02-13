@@ -5,16 +5,15 @@ services:
     container_name: varnish
     restart: unless-stopped
     profiles:
-      - drupal
-      - reverse_proxy
+      - standalone
+      - cache
     volumes:
       - ./conf/varnish/drupal.vcl:/etc/varnish/drupal.vcl
     environment:
       VARNISH_HTTP_PORT: 6081
-
     env_file: .env
-#    ports:
-#      - 127.0.0.1:${VARNISH_PORT:-6081}:6081
+    ports:
+      - 127.0.0.1:${VARNISH_PORT:-6081}:6081
     command: "-s malloc,4GB -p http_max_hdr=512 -p workspace_backend=196608 -p http_req_hdr_len=65536 -p http_resp_hdr_len=65535 -p http_resp_size=4194304 -p thread_pool_min=100 -p thread_pool_max=500 -p http_req_size=131072 -p workspace_client=256k"
 
   search:
@@ -22,8 +21,7 @@ services:
     container_name: solr
     restart: unless-stopped
     profiles:
-      - drupal
-      - solr
+      - search
     environment:
       SOLR_JAVA_MEM: "-Xms128m -Xmx2g"
     env_file: .env
@@ -36,6 +34,7 @@ services:
     restart: unless-stopped
     profiles:
       - database
+      - standalone
     env_file: .env
     volumes:
       - ./conf/mariadb/90-drupal.cnf:/etc/mysql/conf.d/90-drupal.cnf
@@ -44,4 +43,3 @@ services:
 volumes:
   solr-cores:
   mariadb-databases:
-
