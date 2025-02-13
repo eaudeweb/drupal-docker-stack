@@ -1,0 +1,30 @@
+[mysql]
+default-character-set=utf8mb4
+
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+net_read_timeout = 7200
+net_write_timeout = 7200
+myisam_sort_buffer_size = 64M
+table_definition_cache = 4096
+open_files_limit = 65535
+table_open_cache = 16384
+thread_cache_size = 128
+max_connections = 256
+key_buffer_size = 64M
+key_cache_block_size = 4K
+sort_buffer_size = 3M
+read_buffer_size = 2M
+read_rnd_buffer_size = 32M
+join_buffer_size = 8M
+tmp_table_size = 256M
+max_heap_table_size = 256M
+max_allowed_packet = 1024M
+innodb_file_per_table = 1
+innodb_strict_mode = 1
+innodb_log_file_size = 512M
+innodb_log_buffer_size = 4M
+innodb_buffer_pool_size = 512M
+innodb_lock_wait_timeout = 3600
+disable-log-bin=1
