@@ -1,8 +1,14 @@
-SOLR_JAVA_MEM=-Xms128m -Xmx2g
-VARNISH_COMMAND=-s malloc,2GB -p http_max_hdr=512 -p workspace_backend=196608 -p http_req_hdr_len=65536 -p http_resp_hdr_len=65535 -p http_resp_size=4194304 -p thread_pool_min=100 -p thread_pool_max=500 -p http_req_size=131072 -p workspace_client=256k
-
 # MariaDB
 MARIADB_ROOT_PASSWORD=root
 MYSQL_DATABASE: TODO
 MYSQL_USER: TODO
 MYSQL_PASSWORD: TODO
+
+# Redis command line configuration
+REDIS_COMMAND=redis-server /etc/redis.conf
+
+# Apache Solr memory configuration
+SOLR_JAVA_MEM=-Xms128m -Xmx2g
+
+# Varnish command line configuration
+VARNISH_COMMAND=-s malloc,2GB -p http_max_hdr=512 -p workspace_backend=196608 -p http_req_hdr_len=65536 -p http_resp_hdr_len=65535 -p http_resp_size=4194304 -p thread_pool_min=100 -p thread_pool_max=500 -p http_req_size=131072 -p workspace_client=256k

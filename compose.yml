@@ -47,6 +47,20 @@ services:
       customnetwork:
         ipv4_address: 192.168.1.4
 
+  redis:
+    image: redis:${REDIS_CONTAINER_VERSION:-7.4}
+    container_name: ${REDIS_CONTAINER_NAME:-redis}
+    restart: unless-stopped
+    profiles:
+      - redis
+    env_file: .env
+    command: ${REDIS_COMMAND}
+    volumes:
+      - ./conf/redis/redis.conf:/etc/redis.conf
+    networks:
+      customnetwork:
+        ipv4_address: 192.168.1.5
+
 networks:
   customnetwork:
     ipam:
