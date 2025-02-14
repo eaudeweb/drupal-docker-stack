@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     profiles:
       - standalone
-      - cache
+      - varnish
     volumes:
       - ./conf/varnish/drupal.vcl:/etc/varnish/drupal.vcl
     environment:
@@ -19,12 +19,12 @@ services:
       customnetwork:
         ipv4_address: 192.168.1.2
 
-  search:
+  solr:
     image: solr:${SOLR_VERSION:-8}
     container_name: ${SOLR_CONTAINER_NAME:-solr}
     restart: unless-stopped
     profiles:
-      - search
+      - solr
     env_file: .env
     volumes:
       - solr-cores:/var/solr
@@ -32,12 +32,12 @@ services:
       customnetwork:
         ipv4_address: 192.168.1.3
 
-  database:
+  mariadb:
     image: mariadb:${DB_CONTAINER_VERSION:-10.6}
     container_name: ${DB_CONTAINER_NAME:-database}
     restart: unless-stopped
     profiles:
-      - database
+      - mariadb
       - standalone
     env_file: .env
     volumes:
